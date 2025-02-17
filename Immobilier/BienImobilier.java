@@ -9,8 +9,10 @@ public class BienImobilier {
     private boolean estLouable;
     private boolean estVendable;
     private double taxe_fonciere;
+    private Locataire Locataire;
+    private Propriétaire Propriétaire;
 
-    public BienImobilier(String description, int prix_au_m2, int surface, double taux_imposition, boolean estLouable, boolean estVendable) {
+    public BienImobilier(String description, int prix_au_m2, int surface, double taux_imposition, boolean estLouable, boolean estVendable, Propriétaire Propriétaire, Locataire Locataire) {
         this.description = description;
         this.prix_au_m2 = prix_au_m2;
         this.surface = surface;
@@ -18,6 +20,8 @@ public class BienImobilier {
         this.estLouable = estLouable;
         this.estVendable = estVendable;
         this.taxe_fonciere = 0;
+        this.Locataire = Locataire;
+        this.Propriétaire = Propriétaire;
         bID++;
     }
     
@@ -35,6 +39,14 @@ public class BienImobilier {
 
     public int getbID(){
         return bID;
+    }
+
+    public Propriétaire getPropriétaire(){
+        return Propriétaire;
+    }
+
+    public Locataire getLocataire(){
+        return Locataire;
     }
 
     public double getTauxImposition(){
@@ -125,6 +137,13 @@ public class BienImobilier {
 
     public void setdescription(String description_new){
         this.description = description_new;
+    }
+
+    public void setLocataire(Locataire Locataire){
+        this.Locataire = Locataire;
+    }
+    public void setPropriétaire(Propriétaire Propriétaire){
+        this.Propriétaire = Propriétaire;
     }
 }
 

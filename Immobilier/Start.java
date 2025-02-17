@@ -2,7 +2,7 @@ package Immobilier;
 
 public class Start {
     public static void main(String[] args) {
-        BienImobilier Bien1 = new BienImobilier("Petite maison en campagne", 12,120,20.15,true,true);
+        BienImobilier Bien1 = new BienImobilier("Petite maison en campagne", 12,120,20.15,true,true, null , null);
         
         System.out.println("Description du bien 1 :");
         System.out.println(Bien1.getDescription());
@@ -55,6 +55,45 @@ public class Start {
         System.out.println(Bien1.getEstLouable());
 
         System.out.println("Test terminé");
+
+        System.out.println("Ont ajoute un propriétaire et un locataire pour se bien");
+        Locataire Loca1 = new Locataire("Ethan Fayt", "2 rue du paradis", 412,Bien1);
+        Propriétaire Proprio1 = new Propriétaire("Crous", "1 rue de la précarité", false, 1200);
+
+        System.out.println("résumée des infos du locataire 1");
+        System.out.println();
+        System.out.println("Son identitée");
+        System.out.println();
+        System.out.println(Loca1.getIdentitée());
+        System.out.println();
+        System.out.println("Son adresse");
+        System.out.println();
+        System.out.println(Loca1.getAdresse());
+        System.out.println();
+        System.out.println("Le montant de son loyer");
+        System.out.println();
+        System.out.println(Loca1.getMontantLoyer());
+        System.out.println();
+        System.out.println("Maintenant le propriétaire 1");
+        System.out.println();
+        System.out.println("Son identitée :" + Proprio1.getIdentitée() );
+        System.out.println();
+        System.out.println("Présence de résidence secondaire :" + Proprio1.getRésidenceSecondaire());
+        System.out.println();
+        System.out.println("Montant de sa taxe d'habitation :" + Proprio1.getMontantTaxeHabitation());
+        System.out.println();
+        System.out.println("Son adresse :" + Proprio1.getAdressePrincipal());
+        System.out.println();
+        System.out.println("Le crous devient propriétaire du bien 1 et Ethan son locataire");
+        System.out.println();
+        Bien1.setLocataire(Loca1);
+        Bien1.setPropriétaire(Proprio1);
+        System.out.println("Le locataire du " + Bien1.getDescription() + " est " + Bien1.getLocataire().getIdentitée());
+        System.out.println();
+        System.out.println("Le Propriétaire du " + Bien1.getDescription() + " est " + Bien1.getPropriétaire().getIdentitée());
+        System.out.println();
+        System.out.println("La taxe foncière du " + Bien1.getDescription() + " Qu'occupe " + Loca1.getIdentitée() + " est " + Loca1.getOccupe().getTaxeFonciere());
+
         
     }
 }
