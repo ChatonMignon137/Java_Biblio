@@ -10,8 +10,9 @@ public class DocBiblio {
     static private int cmp_emprunt;
     static private int cmp_reservation;
     static private int cmp_pile_retour;
-    MembreBibliothèque Emprunteur = null;
-    MembreBibliothèque Reserviste = null;
+    static private int cmp_etagère;
+    MembreBibliothèque emprunteur = null;
+    MembreBibliothèque reserviste = null;
 
     // Constructor
 
@@ -21,6 +22,7 @@ public class DocBiblio {
         this.auteur = auteur;
         this.annee_publication = annee_publication;
         this.StatutDoc = "étagère";
+        cmp_etagère++;
     }
 
     // Getters
@@ -40,20 +42,23 @@ public class DocBiblio {
     public String getDocStatut(){
         return StatutDoc;
     }
-    public int getCmpEmprunt(){
+    public  int getCmpEmprunt(){
         return cmp_emprunt;
     }
-    public int getCmpReservation(){
+    public int getCmpEtagère(){
+        return cmp_etagère;
+    }
+    public  int getCmpReservation(){
         return cmp_reservation;
     }
-    public int getCmpPileRetour(){
+    public  int getCmpPileRetour(){
         return cmp_pile_retour;
     }
     public MembreBibliothèque getEmprunteur(){
-        return Emprunteur;
+        return emprunteur;
     }
     public MembreBibliothèque getReserviste(){
-        return Reserviste;
+        return reserviste;
     }
 
     // Setters
@@ -77,64 +82,70 @@ public class DocBiblio {
         this.StatutDoc = Statut;
     }
     public void SetEmprunteur(MembreBibliothèque Emprunteur){
-        this.Emprunteur = Emprunteur;
+        this.emprunteur = Emprunteur;
     }
     public void SetReserviste(MembreBibliothèque Réserviste){
-        this.Reserviste = Réserviste;
+        this.reserviste = Réserviste;
     }
     
     //Methodes cycle de vie 
 
     public boolean emprunt(MembreBibliothèque Emprunteur){
-        if(getDocStatut() ==  "étagère")
+        boolean resultat = false;
+        if(getDocStatut().equals("étagère")  )
         {
             SetStatut("emprunté");
             SetEmprunteur(Emprunteur);
             cmp_emprunt++;
-            return true;
+            cmp_etagère--;
+            resultat = true;
         }
-        else{
-            return false;
+        else if (getDocStatut().equals("réservée") && getReserviste() == Emprunteur){
+            SetStatut("emprunté");
+            SetEmprunteur(Emprunteur);
+            SetReserviste(null);
+            cmp_emprunt++;
+            cmp_reservation--;
+            resultat = true;
         }
+        return resultat;
     }
     public boolean reservation(MembreBibliothèque Réserviste){
-        if(getDocStatut() == "emprunté"){
+        boolean resultat = false;
+        if(getDocStatut().equals("emprunté")){
             SetReserviste(Réserviste);
             SetStatut("réservée");
             cmp_reservation++;
-            return true;
+            resultat = true;
         }
-        else{
-            return false;
-        }
+        return resultat;
     }
-    public boolean retour_docu(MembreBibliothèque Réserviste){
-        if (getDocStatut() == "réservée") {
+    public boolean retour_docu(MembreBibliothèque Réserviste, MembreBibliothèque Client){
+        boolean resultat = false;
+        if (getDocStatut().equals("réservée") && getEmprunteur().equals(Client) ) {
             SetStatut("emprunté");
             SetEmprunteur(Réserviste);
             cmp_reservation--;
-            return false;
+            resultat = true;
         }
-        if (getDocStatut() == "emprunté"){
+        if (getDocStatut().equals("emprunté") && getEmprunteur().equals(Client)){
             cmp_emprunt--;
             SetEmprunteur(null);
             SetStatut("pile retour");
             cmp_pile_retour++;
-            return true;
+            resultat = true;
         }
-        else{
-            return false;
-        }
+        return resultat;
     }
     public boolean retour_etagère(){
-        if (getDocStatut() == "pile retour"){
+        boolean resultat = false;
+        if (getDocStatut().equals("pile retour")){
             SetStatut("étagère");
             cmp_pile_retour--;
-            return true;
+            cmp_etagère++;
+            resultat = true;
         }
-        else{
-            return false;
-        }
+        return resultat;
     }
     //autres
     public String toString;
