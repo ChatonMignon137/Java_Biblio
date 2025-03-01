@@ -100,7 +100,7 @@ public class DocBiblio {
             cmp_etagère--;
             resultat = true;
         }
-        else if (getDocStatut().equals("réservée") && getReserviste() == Emprunteur){
+        else if (getDocStatut().equals("Section_réservée") && getReserviste() == Emprunteur){
             SetStatut("emprunté");
             SetEmprunteur(Emprunteur);
             SetReserviste(null);
@@ -112,19 +112,17 @@ public class DocBiblio {
     }
     public boolean reservation(MembreBibliothèque Réserviste){
         boolean resultat = false;
-        if(getDocStatut().equals("emprunté")){
+        if(getDocStatut().equals("emprunté") ){
             SetReserviste(Réserviste);
-            SetStatut("réservée");
-            cmp_reservation++;
+            SetStatut("Section_réservée");
             resultat = true;
         }
         return resultat;
     }
-    public boolean retour_docu(MembreBibliothèque Réserviste, MembreBibliothèque Client){
+    public boolean retour_docu(MembreBibliothèque Client){
         boolean resultat = false;
-        if (getDocStatut().equals("réservée") && getEmprunteur().equals(Client) ) {
+        if (getDocStatut().equals("Section_réservée") && getEmprunteur().equals(Client) ) {
             SetStatut("emprunté");
-            SetEmprunteur(Réserviste);
             cmp_reservation--;
             resultat = true;
         }
@@ -143,6 +141,21 @@ public class DocBiblio {
             SetStatut("étagère");
             cmp_pile_retour--;
             cmp_etagère++;
+            resultat = true;
+        }
+        return resultat;
+    }
+
+    public boolean annulation_reservation(MembreBibliothèque Réserviste){
+        boolean resultat = false;
+        if (getDocStatut().equals("Section_réservée") && getReserviste().equals(Réserviste)){
+            SetStatut("pile retour");
+            SetReserviste(null);
+            cmp_reservation--;
+            resultat = true;
+        }
+        if (getDocStatut().equals("emprunté") && getEmprunteur().equals(Réserviste)){
+            SetEmprunteur(null);
             resultat = true;
         }
         return resultat;

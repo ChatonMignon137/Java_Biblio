@@ -90,7 +90,7 @@ public class TestBibliothèque {
         System.out.println("Le nombre de document réservé est : " + doc1.getCmpReservation());
         System.out.println();
         System.out.println("Le membre 1 rend le document 1");
-        doc1.retour_docu(doc1.getReserviste(), doc1.getEmprunteur());
+        doc1.retour_docu( doc1.getEmprunteur());
         System.out.println();
         System.out.println("Le nombre de document emprunté est : " + doc1.getCmpEmprunt());
         System.out.println("Le nombre de document en étagère est : " + doc1.getCmpEtagère());
@@ -100,7 +100,7 @@ public class TestBibliothèque {
         System.out.println("Son nouvelle emprunteur est donc : " + doc1.getEmprunteur().getNom() + " " + doc1.getEmprunteur().getPrénom());
         System.out.println();
         System.out.println("Le membre 2 rend le document 1");
-        doc1.retour_docu(doc1.getReserviste(), doc1.getEmprunteur());
+        doc1.retour_docu(doc1.getEmprunteur());
         System.out.println();
         System.out.println("Le nombre de document emprunté est : " + doc1.getCmpEmprunt());
         System.out.println("Le nombre de document en étagère est : " + doc1.getCmpEtagère());
@@ -115,18 +115,46 @@ public class TestBibliothèque {
         System.out.println("Le nombre de document en pile de retour est : " + doc1.getCmpPileRetour());
         System.out.println("Le nombre de document réservé est : " + doc1.getCmpReservation());
         System.out.println();
+        System.out.println();
+        System.out.println("Le doc 1 est emprunté puis reservée");
+        doc1.emprunt(membre1);
+        doc1.reservation(membre2);
+        System.out.println();
+        System.out.println("Le membre 2 annule la reservation du document 1");
+        doc1.annulation_reservation(membre2);
+        System.out.println();
+        System.out.println("Le statut du document est : " + doc1.getDocStatut());
+        System.out.println();
+        System.out.println("ont rend et range le document 1");
+        doc1.retour_docu(doc1.getEmprunteur());
+        doc1.retour_etagère();
+        System.out.println();
+        System.out.println("Le statut du document est : " + doc1.getDocStatut());
+        System.out.println();
         
         System.out.println("Test du cycle de vie Avec erreur d'un document");
         System.out.println("Le membre 1 emprunte le document 1");
         doc1.emprunt(membre1);
+        System.out.println("Le document 1 est :" + doc1.getDocStatut() + " il a un reserviste ? " + doc1.getReserviste()); 
         System.out.println();
         System.out.println("Le membre 2 emprunte le document 1 qui est déjà emprunté");
         doc1.emprunt(membre2);
+        System.out.println("Le document 1 est :" + doc1.getDocStatut());
         System.out.println();
         System.out.println("Le membre 2 rend le document 1");
-        doc1.retour_docu(doc1.getReserviste(), doc1.getEmprunteur());
+        doc1.retour_docu(membre2);
         System.out.println();
         System.out.println("Le Statut du doc 1 est :" + doc1.getDocStatut());
         System.out.println();
+        System.out.println("ont rend le document 1 fois de trop");
+        doc1.retour_docu( doc1.getEmprunteur());
+        System.out.println();
+        System.out.println("Le statut du document est : " + doc1.getDocStatut());
+        doc1.retour_docu(doc1.getEmprunteur());
+        System.out.println();
+        System.out.println("Le statut du document est : " + doc1.getDocStatut());
+        System.out.println();
+        System.out.println("Le bibliothécaire range le document 1");
+        doc1.retour_etagère();
     }
 }
