@@ -39,5 +39,8 @@ public class Propriétaire {
     public void setAdressePrincipal(String AdressePrincipal){
         this.AdressePrincipal = AdressePrincipal;
     }
+    public String toString(){
+        return "Propriétaire : " + Identitée + " habite au " + AdressePrincipal + " et paye une taxe d'habitation de " + MontantTaxeHabitation + "€";
+    }
 
 }

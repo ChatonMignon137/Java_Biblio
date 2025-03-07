@@ -65,7 +65,10 @@ public class BienImobilier {
         return taxe_fonciere;
     }
 
-    public String toString;
+    public String toString(){
+        String resultat = "Description: " + description + "\n" + "Prix au m2: " + prix_au_m2 + "\n" + "Surface: " + surface + "\n" + "Taux d'imposition: " + taux_imposition + "\n" + "Est louable: " + estLouable + "\n" + "Est vendable: " + estVendable + "\n" + "Taxe foncière: " + taxe_fonciere + "\n";
+        return resultat;
+    }
 
     public double calculateTaxeFonciere(){
         double resultat = 0;
@@ -146,6 +149,7 @@ public class BienImobilier {
         this.Propriétaire = Propriétaire;
     }
 }
+
 
 
 

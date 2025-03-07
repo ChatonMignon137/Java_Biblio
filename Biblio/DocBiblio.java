@@ -7,6 +7,7 @@ public class DocBiblio {
     String auteur;
     int annee_publication;
     String StatutDoc;
+    String StatutDocPhysique = "étagère";
     static private int cmp_emprunt;
     static private int cmp_reservation;
     static private int cmp_pile_retour;
@@ -21,7 +22,7 @@ public class DocBiblio {
         this.titre = titre;
         this.auteur = auteur;
         this.annee_publication = annee_publication;
-        this.StatutDoc = "étagère";
+        this.StatutDoc = "disponible";
         cmp_etagère++;
     }
 
@@ -60,6 +61,9 @@ public class DocBiblio {
     public MembreBibliothèque getReserviste(){
         return reserviste;
     }
+    public String getDocStatutPhysique(){
+        return StatutDocPhysique;
+    }
 
     // Setters
 
@@ -87,21 +91,26 @@ public class DocBiblio {
     public void SetReserviste(MembreBibliothèque Réserviste){
         this.reserviste = Réserviste;
     }
+    public void SetDocStatutPhysique(String Statut){
+        this.StatutDocPhysique = Statut;
+    }
     
     //Methodes cycle de vie 
 
     public boolean emprunt(MembreBibliothèque Emprunteur){
         boolean resultat = false;
-        if(getDocStatut().equals("étagère")  )
+        if(getDocStatut().equals("disponible")  )
         {
             SetStatut("emprunté");
+            SetDocStatutPhysique("chez l'emprunteur");
             SetEmprunteur(Emprunteur);
             cmp_emprunt++;
             cmp_etagère--;
             resultat = true;
         }
-        else if (getDocStatut().equals("Section_réservée") && getReserviste() == Emprunteur){
+        else if (getDocStatutPhysique().equals("Section_réservée") && getDocStatut().equals("réservé") && getReserviste() == Emprunteur){
             SetStatut("emprunté");
+            SetDocStatutPhysique("chez l'emprunteur");
             SetEmprunteur(Emprunteur);
             SetReserviste(null);
             cmp_emprunt++;
@@ -112,24 +121,26 @@ public class DocBiblio {
     }
     public boolean reservation(MembreBibliothèque Réserviste){
         boolean resultat = false;
-        if(getDocStatut().equals("emprunté") ){
+        if(getDocStatut().equals("emprunté") && getEmprunteur().equals(Réserviste) != true){
             SetReserviste(Réserviste);
-            SetStatut("Section_réservée");
+            SetStatut("réservé");
             resultat = true;
         }
         return resultat;
     }
-    public boolean retour_docu(MembreBibliothèque Client){
+    public boolean retour_docu(){
         boolean resultat = false;
-        if (getDocStatut().equals("Section_réservée") && getEmprunteur().equals(Client) ) {
-            SetStatut("emprunté");
-            cmp_reservation--;
+        if (getDocStatut().equals("réservé") ) {
+            SetDocStatutPhysique("Section_réservée");
+            SetStatut("Section_réservée");
+            cmp_reservation++;
             resultat = true;
         }
-        if (getDocStatut().equals("emprunté") && getEmprunteur().equals(Client)){
+        if (getDocStatut().equals("emprunté")){
             cmp_emprunt--;
             SetEmprunteur(null);
             SetStatut("pile retour");
+            SetDocStatutPhysique("pile retour");
             cmp_pile_retour++;
             resultat = true;
         }
@@ -138,7 +149,8 @@ public class DocBiblio {
     public boolean retour_etagère(){
         boolean resultat = false;
         if (getDocStatut().equals("pile retour")){
-            SetStatut("étagère");
+            SetStatut("disponible");
+            SetDocStatutPhysique("étagère");
             cmp_pile_retour--;
             cmp_etagère++;
             resultat = true;
@@ -150,17 +162,23 @@ public class DocBiblio {
         boolean resultat = false;
         if (getDocStatut().equals("Section_réservée") && getReserviste().equals(Réserviste)){
             SetStatut("pile retour");
+            SetDocStatutPhysique("pile retour");
             SetReserviste(null);
             cmp_reservation--;
             resultat = true;
         }
         if (getDocStatut().equals("emprunté") && getEmprunteur().equals(Réserviste)){
             SetEmprunteur(null);
+            SetStatut("emprunté");
+            SetDocStatutPhysique("chez l'emprunteur");
             resultat = true;
         }
         return resultat;
     }
     //autres
-    public String toString;
+    public String toString(){
+        String resultat = "Code d'archivage: " + code_archivage + "\n" + "Titre: " + titre + "\n" + "Auteur: " + auteur + "\n" + "Année de publication: " + annee_publication + "\n" + "Statut: " + StatutDoc + "\n";
+        return resultat;
+    }
 }
 

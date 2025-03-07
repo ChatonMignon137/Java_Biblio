@@ -1,99 +1,137 @@
 package Immobilier;
+import java.util.*;
 
 public class Start {
+    static BienImobilier Bien1 = new BienImobilier("Petite maison en campagne", 12, 120, 20.15, true, true, null, null);
+    static BienImobilier Bien2 = new BienImobilier("Appartement en ville", 20, 200, 15.5, true, true, null, null);
+    static Locataire Loca1 = new Locataire("Ethan Fayt", "2 rue du paradis", 412, Bien1);
+    static Propriétaire Proprio1 = new Propriétaire("Crous", "1 rue de la précarité", false, 1200);
+    static Locataire Loca2 = new Locataire("Jean Dupont", "5 rue de la liberté", 500, Bien2);
+    static Propriétaire Proprio2 = new Propriétaire("Dupont", "5 rue de la liberté", true, 2000);
+    static Scanner entree = new Scanner(System.in);
     public static void main(String[] args) {
-        BienImobilier Bien1 = new BienImobilier("Petite maison en campagne", 12,120,20.15,true,true, null , null);
-        
-        System.out.println("Description du bien 1 :");
-        System.out.println(Bien1.getDescription());
-
-        System.out.println("Prix au mètre ² :");
-        System.out.println(Bien1.getPrixAuM2());
-
-        System.out.println("La surface : ");
-        System.out.println(Bien1.getSurface());
-
-        System.out.println("son taux d'imposition :");
-        System.out.println(Bien1.getTauxImposition());
-
-        System.out.println("L'appartement est t'il louable");
-        System.out.println(Bien1.getEstLouable());
-
-        System.out.println("L'appartement est t'il Vendable");
-        System.out.println(Bien1.getEstvendable());
-
-        Bien1.setTaxeFonciere(Bien1.calculateTaxeFonciere());
-        System.out.println("L'appartement a une taxe foncière pour 1 an de :");
-        System.out.println(Bien1.getTaxeFonciere());
-
-        System.out.println("Changement de la description pour building dans le 16 ème");
-        Bien1.setdescription(" Building dans le 16eme");
-        System.out.println(Bien1.getDescription());
-
-        System.out.println("Prix parisien oblige il n'est plus vendable");
-        Bien1.setEstVendable(false);
-        System.out.println(Bien1.getEstvendable());
-
-        System.out.println("Le prix explose et atteint les 1212");
-        Bien1.setprixm2(14);
-        System.out.println(Bien1.getPrixAuM2());
-
-        System.out.println("Changement du taux d'imposition");
-        Bien1.setTauxImposition(29.94);
-        System.out.println(Bien1.getTauxImposition());
-
-        System.out.println("Changement de la surface");
-        Bien1.setSurface(30);
-        System.out.println(Bien1.getSurface());
-
-        System.out.println("Recalcul de la taxe foncière");
-        Bien1.setTaxeFonciere(Bien1.calculateTaxeFonciere());
-        System.out.println(Bien1.getTaxeFonciere());
-
-        System.out.println("Changement de la louabilité");
-        Bien1.setEstLouable(false);
-        System.out.println(Bien1.getEstLouable());
-
-        System.out.println("Test terminé");
-
-        System.out.println("Ont ajoute un propriétaire et un locataire pour se bien");
-        Locataire Loca1 = new Locataire("Ethan Fayt", "2 rue du paradis", 412,Bien1);
-        Propriétaire Proprio1 = new Propriétaire("Crous", "1 rue de la précarité", false, 1200);
-
-        System.out.println("résumée des infos du locataire 1");
-        System.out.println();
-        System.out.println("Son identitée");
-        System.out.println();
-        System.out.println(Loca1.getIdentitée());
-        System.out.println();
-        System.out.println("Son adresse");
-        System.out.println();
-        System.out.println(Loca1.getAdresse());
-        System.out.println();
-        System.out.println("Le montant de son loyer");
-        System.out.println();
-        System.out.println(Loca1.getMontantLoyer());
-        System.out.println();
-        System.out.println("Maintenant le propriétaire 1");
-        System.out.println();
-        System.out.println("Son identitée :" + Proprio1.getIdentitée() );
-        System.out.println();
-        System.out.println("Présence de résidence secondaire :" + Proprio1.getRésidenceSecondaire());
-        System.out.println();
-        System.out.println("Montant de sa taxe d'habitation :" + Proprio1.getMontantTaxeHabitation());
-        System.out.println();
-        System.out.println("Son adresse :" + Proprio1.getAdressePrincipal());
-        System.out.println();
-        System.out.println("Le crous devient propriétaire du bien 1 et Ethan son locataire");
-        System.out.println();
         Bien1.setLocataire(Loca1);
         Bien1.setPropriétaire(Proprio1);
-        System.out.println("Le locataire du " + Bien1.getDescription() + " est " + Bien1.getLocataire().getIdentitée());
-        System.out.println();
-        System.out.println("Le Propriétaire du " + Bien1.getDescription() + " est " + Bien1.getPropriétaire().getIdentitée());
-        System.out.println();
-        System.out.println("La taxe foncière du " + Bien1.getDescription() + " Qu'occupe " + Loca1.getIdentitée() + " est " + Loca1.getOccupe().getTaxeFonciere());
+        Bien2.setLocataire(Loca2);
+        Bien2.setPropriétaire(Proprio2);
 
+        int choix;
         
+        do {
+            System.out.println("Bienvenue dans le programme de gestion de bien immobillier");
+            System.out.println("1. Afficher les informations d'un bien");
+            System.out.println("2. Afficher les informations d'un propriétaire");
+            System.out.println("3. Afficher les informations d'un locataire");
+            System.out.println("4. Afficher l'état d'un bien");
+            System.out.println("5. Modifier l'état d'un bien");
+            System.out.println("6. Quitter");
+            System.out.println("Veuillez entrer le numéro de l'action que vous souhaitez effectuer");
+            choix = entree.nextInt();
+            entree.nextLine();
+            switch (choix) {
+                case 1:
+                    BienImobilier choixBien = choixBienImobilier();
+                    System.out.println(choixBien.toString());
+                    break;
+                case 2:
+                    Propriétaire choixPropriétaire = choixPropriétaire();
+                    System.out.println(choixPropriétaire.toString());
+                    break;
+                case 3:
+                    Locataire choixLocataire = choixLocataire();
+                    System.out.println(choixLocataire.toString());
+                    break;
+                case 4:
+                    choixBien = choixBienImobilier();
+                    if (choixBien.getEstLouable() == true) {
+                        System.out.println("Le bien est louable");
+                    } else {
+                        System.out.println("Le bien n'est pas louable");
+                    }
+                    if (choixBien.getEstvendable() == true) {
+                        System.out.println("Le bien est vendable");
+                    } else {
+                        System.out.println("Le bien n'est pas vendable");
+                    }
+                    break;
+                case 5:
+                    choixBien = choixBienImobilier();
+                    System.out.println("Voulez-vous rendre le bien louable ? (oui/non)");
+                    String reponse = entree.nextLine();
+                    if (reponse.equals("oui")) {
+                        choixBien.setEstLouable(true);
+                    } else {
+                        choixBien.setEstLouable(false);
+                    }
+                    System.out.println("Voulez-vous rendre le bien vendable ? (oui/non)");
+                    reponse = entree.nextLine();
+                    if (reponse.equals("oui")) {
+                        choixBien.setEstVendable(true);
+                    } else {
+                        choixBien.setEstVendable(false);
+                    }
+                    break;
+                case 6:
+                    System.out.println("Merci d'avoir utilisé notre programme");
+                    break;
+                default:
+                    System.out.println("Veuillez entrer un numéro valide");
+                    break;
+            }
+        } while (choix != 6);
+        entree.close();
+    }
+
+    public static BienImobilier choixBienImobilier() {
+        BienImobilier choixBien;
+        do {
+            System.out.println("Veuillez choisir un bien parmi les suivants : ");
+            System.out.println("1. Petite maison en campagne");
+            System.out.println("2. Appartement en ville");
+            int choix = entree.nextInt();
+            if (choix == 1) {
+                choixBien = Bien1;
+            } else if (choix == 2) {
+                choixBien = Bien2;
+            } else {
+                choixBien = null;
+            }
+        } while (choixBien == null);
+        return choixBien;
+    }
+
+    public static Locataire choixLocataire(){
+        Locataire choixLocataire;
+        do {
+            System.out.println("Veuillez choisir un locataire parmi les suivants : ");
+            System.out.println("1. Ethan Fayt");
+            System.out.println("2. Jean Dupont");
+            int choix = entree.nextInt();
+            if (choix == 1) {
+                choixLocataire = Loca1;
+            } else if (choix == 2) {
+                choixLocataire = Loca2;
+            } else {
+                choixLocataire = null;
+            }
+        } while (choixLocataire == null);
+        return choixLocataire;
+    }
+    public static Propriétaire choixPropriétaire(){
+        Propriétaire choixPropriétaire;
+        do {
+            System.out.println("Veuillez choisir un propriétaire parmi les suivants : ");
+            System.out.println("1. Crous");
+            System.out.println("2. Dupont");
+            int choix = entree.nextInt();
+            if (choix == 1) {
+                choixPropriétaire = Proprio1;
+            } else if (choix == 2) {
+                choixPropriétaire = Proprio2;
+            } else {
+                choixPropriétaire = null;
+            }
+        } while (choixPropriétaire == null);
+        return choixPropriétaire;
     }
 }

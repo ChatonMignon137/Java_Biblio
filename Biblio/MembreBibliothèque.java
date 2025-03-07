@@ -44,5 +44,7 @@ public class MembreBibliothèque{
     public void setAdresse(String Adresse){
         this.Adresse = Adresse;
     }
-    public String toString;
+    public String toString(){
+        return "Membre n°" + NuméroAbonnée + " : " + Prénom + " " + Nom + " habite au " + Adresse + " et son numéro de téléphone est le " + NuméroTéléphone;
+    }
 }

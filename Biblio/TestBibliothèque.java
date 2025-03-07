@@ -1,160 +1,227 @@
 package Biblio;
 
+import java.util.*;
 public class TestBibliothèque {
+
+    static DocBiblio doc1 = new DocBiblio("004. 178 K20PM", "Introduction au java", "J.Leblanc", 2015);
+        static DocBiblio doc2 = new DocBiblio("967. 4987 T248O", "Structure de données", "M.Machin", 2022);
+        static DocBiblio doc3 = new DocBiblio("527. 4987 T2205", "Besoin d'IHM", "E.fayt", 2024);
+        static DocBiblio doc4 = new DocBiblio("121. 2121 21212", "50 nuances d'egrep" , "B.A", 1212);
+        static DocBiblio doc5 = new DocBiblio("003. 178 K20PM", "Yes or No La Jeunesse", "H.Keddoucci", 2015);
+        static DocBiblio doc6 = new DocBiblio("004. 162 K20PM", "PythonBetter", "D.Vachette", 2023);
+        static DocBiblio doc7 = new DocBiblio("004. 178 12KMH", "LinuxBetter", "G.Marion", 2022);
+        static DocBiblio doc8 = new DocBiblio("004. 178 ABIBJ", "PLSql", "E.Fayt", 2010);
+        static DocBiblio doc9 = new DocBiblio("004. 178 12123", "Tintin au Congo", "r.aciste", 2015);
+        static DocBiblio doc10 = new DocBiblio("011. 110 10100", "Compter sur ses doigt en binaire", "P.Andre",2005);
+        static DocBiblio choixdocBiblio;
+
+        static MembreBibliothèque membre1 = new MembreBibliothèque("Chalon", "Emilien", "06.12.12.12.12", "40 rue de la zikette");
+        static MembreBibliothèque membre2 = new MembreBibliothèque("Germignon", "Nicolas", "06.13.13.13.13", "13 rue du HESSQL");
+        static MembreBibliothèque membre3 = new MembreBibliothèque("Naudts", "Angelo","06.06.06.06.06", "1 rue de la rue");
+        static MembreBibliothèque membre4 = new MembreBibliothèque("Anquetil", "Nathalie", "07.07.07.07.07", "404 Rue du NotFound");
+        static MembreBibliothèque membre5 = new MembreBibliothèque("Bourbon", "Mehdi", "07.12.12.12.12", "404 Rue de la JCOF");
+        static MembreBibliothèque membre6 = new MembreBibliothèque("Pointeur", "Harriut", "06.11.11.11.11","12 rue de feyssine");
+        static MembreBibliothèque membre7 = new MembreBibliothèque("Chandon", "Basile", "01.15.15.15.15", "12 rue de la toupie");
+        static MembreBibliothèque membre8 = new MembreBibliothèque("Filliao", "luc", "06.05.05.05.05.05", "5 Rue de la présidence");
+        static MembreBibliothèque membre9 = new MembreBibliothèque("Besnard", "Valentin", "07.06.06.06.06.06", "12 rue du secrétariat");
+        static MembreBibliothèque membre10 = new MembreBibliothèque("Nouvel", "Armand", "06.05.04.03.02.01", "12 rue de la bible");
+        static MembreBibliothèque choixMembreBibliothèque;
+
+        static Scanner entree = new Scanner(System.in);
+        static int choix;
     public static void main(String[] args) {
-        DocBiblio doc1 = new DocBiblio("004. 178 K20PM", "Introduction au java", "J.Leblanc", 2015);
-        DocBiblio doc2 = new DocBiblio("967. 4987 T248O", "Structure de données", "M.Machin", 2022);
-        DocBiblio doc3 = new DocBiblio("527. 4987 T2205", "Besoin d'IHM", "E.fayt", 2024);
-        DocBiblio doc4 = new DocBiblio("121. 2121 21212", "50 nuances d'egrep" , "B.A", 1212);
-        DocBiblio doc5 = new DocBiblio("003. 178 K20PM", "Yes or No La Jeunesse", "H.Keddoucci", 2015);
-        DocBiblio doc6 = new DocBiblio("004. 162 K20PM", "PythonBetter", "D.Vachette", 2023);
-        DocBiblio doc7 = new DocBiblio("004. 178 12KMH", "LinuxBetter", "G.Marion", 2022);
-        DocBiblio doc8 = new DocBiblio("004. 178 ABIBJ", "PLSql", "E.Fayt", 2010);
-        DocBiblio doc9 = new DocBiblio("004. 178 12123", "Tintin au Congo", "r.aciste", 2015);
-        DocBiblio doc10 = new DocBiblio("011. 110 10100", "Compter sur ses doigt en binaire", "P.Andre",2005);
-
-        MembreBibliothèque membre1 = new MembreBibliothèque("Chalon", "Emilien", "06.12.12.12.12", "40 rue de la zikette");
-        MembreBibliothèque membre2 = new MembreBibliothèque("Germinagni", "Nicolas", "06.13.13.13.13", "13 rue du HESSQL");
-        MembreBibliothèque membre3 = new MembreBibliothèque("Naudts", "Angelo","06.06.06.06.06", "1 rue de la rue");
-        MembreBibliothèque membre4 = new MembreBibliothèque("Anquetil", "Nathalie", "07.07.07.07.07", "404 Rue du NotFound");
-        MembreBibliothèque membre5 = new MembreBibliothèque("Bourbon", "Mehdi", "07.12.12.12.12", "404 Rue de la JCOF");
-        MembreBibliothèque membre6 = new MembreBibliothèque("Pointeur", "Harriut", "06.11.11.11.11","12 rue de feyssine");
-        MembreBibliothèque membre7 = new MembreBibliothèque("Chandon", "Basile", "01.15.15.15.15", "12 rue de la toupie");
-        MembreBibliothèque membre8 = new MembreBibliothèque("Filliao", "luc", "06.05.05.05.05.05", "5 Rue de la présidence");
-        MembreBibliothèque membre9 = new MembreBibliothèque("Besnard", "Valentin", "07.06.06.06.06.06", "12 rue du secrétariat");
-        MembreBibliothèque membre10 = new MembreBibliothèque("Nouvel", "Armand", "06.05.04.03.02.01", "12 rue de la bible");
-
-        // test to string
-        System.out.println("Liste des Membres");
-        System.out.println(membre1.getNom() + " " + membre1.getPrénom() + " " + membre1.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre2.getNom() + " " + membre2.getPrénom() + " " + membre2.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre3.getNom() + " " + membre3.getPrénom() + " " + membre3.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre4.getNom() + " " + membre4.getPrénom() + " " + membre4.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre5.getNom() + " " + membre5.getPrénom() + " " + membre5.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre6.getNom() + " " + membre6.getPrénom() + " " + membre6.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre7.getNom() + " " + membre7.getPrénom() + " " + membre7.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre8.getNom() + " " + membre8.getPrénom() + " " + membre8.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre9.getNom() + " " + membre9.getPrénom() + " " + membre9.getNuméroAbonnée());
-        System.out.println();
-        System.out.println(membre10.getNom() + " " + membre10.getPrénom() + " " + membre10.getNuméroAbonnée());
-        System.out.println();
-        System.out.println("Liste des oeuvres");
-        System.out.println(doc1.getTitre() + " " + doc1.getAuteur() + " " + doc1.getAnneePublication());
-        System.out.println();
-        System.out.println(doc2.getTitre() + " " + doc2.getAuteur() + " " + doc2.getAnneePublication());
-        System.out.println();
-        System.out.println(doc3.getTitre() + " " + doc3.getAuteur() + " " + doc3.getAnneePublication());
-        System.out.println();
-        System.out.println(doc4.getTitre() + " " + doc4.getAuteur() + " " + doc4.getAnneePublication());
-        System.out.println();
-        System.out.println(doc5.getTitre() + " " + doc5.getAuteur() + " " + doc5.getAnneePublication());
-        System.out.println();
-        System.out.println(doc6.getTitre() + " " + doc6.getAuteur() + " " + doc6.getAnneePublication());
-        System.out.println();
-        System.out.println(doc7.getTitre() + " " + doc7.getAuteur() + " " + doc7.getAnneePublication());
-        System.out.println();
-        System.out.println(doc8.getTitre() + " " + doc8.getAuteur() + " " + doc8.getAnneePublication());
-        System.out.println();
-        System.out.println(doc9.getTitre() + " " + doc9.getAuteur() + " " + doc9.getAnneePublication());
-        System.out.println();
-        System.out.println(doc10.getTitre() + " " + doc10.getAuteur() + " " + doc10.getAnneePublication());
-
-        // test des emprunts
-
-        System.out.println("Test du cycle de vie basique d'un document");
-
-        System.out.println("Le nombre de document emprunté est : " + doc1.getCmpEmprunt());
-        System.out.println("Le nombre de document en étagère est : " + doc1.getCmpEtagère());
-        System.out.println("Le nombre de document en pile de retour est : " + doc1.getCmpPileRetour());
-        System.out.println("Le nombre de document réservé est : " + doc1.getCmpReservation());
-
-        System.out.println("Le membre 1 emprunte le document 1");
-        doc1.emprunt(membre1);
-        System.out.println();
-        System.out.println("Le membre 2 réserve le document 1");
-        doc1.reservation(membre2);
-        System.out.println();
-        System.out.println("L'emprunteur du livre : " + doc1.titre + " Est : " + doc1.getEmprunteur().getNom() + " " + doc1.getEmprunteur().getPrénom() + " et son réserviste est : " + doc1.getReserviste().getNom()  + " " + doc1.getReserviste().getPrénom());
-        System.out.println();
-        System.out.println("Le nombre de document emprunté est : " + doc1.getCmpEmprunt());
-        System.out.println("Le nombre de document en étagère est : " + doc1.getCmpEtagère());
-        System.out.println("Le nombre de document en pile de retour est : " + doc1.getCmpPileRetour());
-        System.out.println("Le nombre de document réservé est : " + doc1.getCmpReservation());
-        System.out.println();
-        System.out.println("Le membre 1 rend le document 1");
-        doc1.retour_docu( doc1.getEmprunteur());
-        System.out.println();
-        System.out.println("Le nombre de document emprunté est : " + doc1.getCmpEmprunt());
-        System.out.println("Le nombre de document en étagère est : " + doc1.getCmpEtagère());
-        System.out.println("Le nombre de document en pile de retour est : " + doc1.getCmpPileRetour());
-        System.out.println("Le nombre de document réservé est : " + doc1.getCmpReservation());
-        System.out.println();
-        System.out.println("Son nouvelle emprunteur est donc : " + doc1.getEmprunteur().getNom() + " " + doc1.getEmprunteur().getPrénom());
-        System.out.println();
-        System.out.println("Le membre 2 rend le document 1");
-        doc1.retour_docu(doc1.getEmprunteur());
-        System.out.println();
-        System.out.println("Le nombre de document emprunté est : " + doc1.getCmpEmprunt());
-        System.out.println("Le nombre de document en étagère est : " + doc1.getCmpEtagère());
-        System.out.println("Le nombre de document en pile de retour est : " + doc1.getCmpPileRetour());
-        System.out.println("Le nombre de document réservé est : " + doc1.getCmpReservation());
-        System.out.println();
-        System.out.println("Le bibliothécaire range le document 1");
-        doc1.retour_etagère();
-        System.out.println();
-        System.out.println("Le nombre de document emprunté est : " + doc1.getCmpEmprunt());
-        System.out.println("Le nombre de document en étagère est : " + doc1.getCmpEtagère());
-        System.out.println("Le nombre de document en pile de retour est : " + doc1.getCmpPileRetour());
-        System.out.println("Le nombre de document réservé est : " + doc1.getCmpReservation());
-        System.out.println();
-        System.out.println();
-        System.out.println("Le doc 1 est emprunté puis reservée");
-        doc1.emprunt(membre1);
-        doc1.reservation(membre2);
-        System.out.println();
-        System.out.println("Le membre 2 annule la reservation du document 1");
-        doc1.annulation_reservation(membre2);
-        System.out.println();
-        System.out.println("Le statut du document est : " + doc1.getDocStatut());
-        System.out.println();
-        System.out.println("ont rend et range le document 1");
-        doc1.retour_docu(doc1.getEmprunteur());
-        doc1.retour_etagère();
-        System.out.println();
-        System.out.println("Le statut du document est : " + doc1.getDocStatut());
-        System.out.println();
-        
-        System.out.println("Test du cycle de vie Avec erreur d'un document");
-        System.out.println("Le membre 1 emprunte le document 1");
-        doc1.emprunt(membre1);
-        System.out.println("Le document 1 est :" + doc1.getDocStatut() + " il a un reserviste ? " + doc1.getReserviste()); 
-        System.out.println();
-        System.out.println("Le membre 2 emprunte le document 1 qui est déjà emprunté");
-        doc1.emprunt(membre2);
-        System.out.println("Le document 1 est :" + doc1.getDocStatut());
-        System.out.println();
-        System.out.println("Le membre 2 rend le document 1");
-        doc1.retour_docu(membre2);
-        System.out.println();
-        System.out.println("Le Statut du doc 1 est :" + doc1.getDocStatut());
-        System.out.println();
-        System.out.println("ont rend le document 1 fois de trop");
-        doc1.retour_docu( doc1.getEmprunteur());
-        System.out.println();
-        System.out.println("Le statut du document est : " + doc1.getDocStatut());
-        doc1.retour_docu(doc1.getEmprunteur());
-        System.out.println();
-        System.out.println("Le statut du document est : " + doc1.getDocStatut());
-        System.out.println();
-        System.out.println("Le bibliothécaire range le document 1");
-        doc1.retour_etagère();
+        do {
+            System.out.println("Bienvenue dans le programme de gestion de la bibliothèque");
+            System.out.println();
+            System.out.println("1. Afficher les informations d'un document");
+            System.out.println("2. Afficher l'état d'un document");
+            System.out.println("3. Modifier l'état d'un document");
+            System.out.println("4. Reservation d'un document");
+            System.out.println("5. Nombre de document par emplacement");
+            System.out.println("6. Afficher les informations des membre emprunteurs ou réservant un document");
+            System.out.println("7. Quitter");
+            System.out.println();
+            System.out.println("-------------------------------------------------------------");
+            System.out.println("Veuillez entrer le numéro de l'action que vous souhaitez effectuer");
+            choix = entree.nextInt();
+            entree.nextLine();
+            switch (choix) {
+                case 1:
+                    System.out.println(choixdocBiblio().toString());
+                    break;
+                case 2:
+                    choixdocBiblio = choixdocBiblio();
+                    System.out.println("le document est actuellement : " + choixdocBiblio.getDocStatut() + " dans la " + choixdocBiblio.StatutDocPhysique);
+                    break;
+                case 3:
+                    ChoixChangementEtat();
+                    break;
+                case 4:
+                    choixdocBiblio = choixdocBiblio();
+                    System.out.println("Veuillez entrer le numéro de l'abonné qui souhaite réserver le document");
+                    choixMembreBibliothèque = choixMembreBibliothèque();
+                    if (choixdocBiblio.reservation(choixMembreBibliothèque)) {
+                        System.out.println("La réservation a bien été effectuée");
+                    } else {
+                        System.out.println("La réservation n'a pas pu être effectuée");
+                    }
+                    break;
+                case 5:
+                    NbdocumentParEmplacement();
+                    break;
+                case 6:
+                    choixdocBiblio = choixdocBiblio();
+                    if (choixdocBiblio.getDocStatut().equals("emprunté")) {
+                        System.out.println("Le document est actuellement emprunté par " + choixdocBiblio.getEmprunteur().toString());
+                    } else if (choixdocBiblio.getDocStatut().equals("réservé")) {
+                        System.out.println("Le document est actuellement réservé par " + choixdocBiblio.getReserviste().toString());
+                    } else {
+                        System.out.println("Le document n'est ni emprunté ni réservé");
+                    }
+                    break;
+            
+                default:
+                    break;
+            }
+        } while(choix != 7);
     }
+
+    public static DocBiblio choixdocBiblio() {
+        do
+        {
+        System.out.println("Veuillez choisir un document");
+        System.out.println("1. " + doc1.getTitre());
+        System.out.println("2. " + doc2.getTitre());
+        System.out.println("3. " + doc3.getTitre());
+        System.out.println("4. " + doc4.getTitre());
+        System.out.println("5. " + doc5.getTitre());
+        System.out.println("6. " + doc6.getTitre());
+        System.out.println("7. " + doc7.getTitre());
+        System.out.println("8. " + doc8.getTitre());
+        System.out.println("9. " + doc9.getTitre());
+        System.out.println("10. " + doc10.getTitre());
+        int choix = entree.nextInt();
+        entree.nextLine();
+        switch (choix) {
+            case 1:
+                return doc1;
+            case 2:
+                return doc2;
+            case 3:
+                return doc3;
+            case 4:
+                return doc4;
+            case 5:
+                return doc5;
+            case 6:
+                return doc6;
+            case 7:
+                return doc7;
+            case 8:
+                return doc8;
+            case 9:
+                return doc9;
+            case 10:
+                return doc10;
+            default:
+                return null;
+            }
+        }while(choix < 1 || choix > 10);
+        }
+    
+
+    public static void NbdocumentParEmplacement() {
+        System.out.println("Nombre de document par emplacement");
+        System.out.println("Nombre de document sur l'étagère : " + doc1.getCmpEtagère());
+        System.out.println("Nombre de document emprunté : " + doc1.getCmpEmprunt());
+        System.out.println("Nombre de document réservé : " + doc1.getCmpReservation());
+        System.out.println("Nombre de document dans la pile de retour : " + doc1.getCmpPileRetour());
+    }
+
+    public static void ChoixChangementEtat(){
+        choixdocBiblio = choixdocBiblio();
+        choixMembreBibliothèque = choixMembreBibliothèque();
+        do{
+            System.out.println("Veuillez choisir le nouveau statut du document");
+            System.out.println("1. Emprunt");
+            System.out.println("2. Retour");
+            System.out.println("3. Retour à l'étagère");
+            choix = entree.nextInt();
+            entree.nextLine();
+            switch (choix) {
+                case 1:
+                    if(choixdocBiblio.emprunt(choixMembreBibliothèque)){
+                        System.out.println("L'emprunt a bien été effectué");
+                    }else{
+                        System.out.println("L'emprunt n'a pas pu être effectué");
+                    }
+                    break;
+                case 2:
+                    if(choixdocBiblio.retour_docu()) {
+                        System.out.println("Le retour a bien été effectué");
+                    }else{
+                        System.out.println("Le retour n'a pas pu être effectué");
+                    }
+                    break;
+                case 3:
+                    if(choixdocBiblio.retour_etagère()){
+                        System.out.println("Le retour à l'étagère a bien été effectué");
+                    }
+                    else{
+                        System.out.println("Le retour à l'étagère n'a pas pu être effectué");
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        while(choix < 1 || choix > 3);
+    }
+
+    public static MembreBibliothèque choixMembreBibliothèque(){
+        do{
+            System.out.println("Veuillez choisir un membre");
+            System.out.println("1. " + membre1.getNom());
+            System.out.println("2. " + membre2.getNom());
+            System.out.println("3. " + membre3.getNom());
+            System.out.println("4. " + membre4.getNom());
+            System.out.println("5. " + membre5.getNom());
+            System.out.println("6. " + membre6.getNom());
+            System.out.println("7. " + membre7.getNom());
+            System.out.println("8. " + membre8.getNom());
+            System.out.println("9. " + membre9.getNom());
+            System.out.println("10. " + membre10.getNom());
+            int choix = entree.nextInt();
+            entree.nextLine();
+            switch (choix) {
+                case 1:
+                    return membre1;
+                case 2:
+                    return membre2;
+                case 3:
+                    return membre3;
+                case 4:
+                    return membre4;
+                case 5:
+                    return membre5;
+                case 6:
+                    return membre6;
+                case 7:
+                    return membre7;
+                case 8:
+                    return membre8;
+                case 9:
+                    return membre9;
+                case 10:
+                    return membre10;
+                default:
+                    return null;
+            }
+        }while(choix < 1 || choix > 10);
+    }
+
 }
+
+
+

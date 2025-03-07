@@ -40,5 +40,8 @@ public class Locataire {
     public void setIdentitée(String Identitée){
         this.Identitée = Identitée;
     }
+    public String toString(){
+        return "Locataire : " + Identitée + " habite au " + Adresse + " et paye un loyer de " + MontantLoyer + "€ pour le bien " + Occupe.getDescription();
+    }
     
 }
