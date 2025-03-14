@@ -43,16 +43,16 @@ public class DocBiblio {
     public String getDocStatut(){
         return StatutDoc;
     }
-    public  int getCmpEmprunt(){
+    public static int getCmpEmprunt(){
         return cmp_emprunt;
     }
-    public int getCmpEtagère(){
+    public static int getCmpEtagère(){
         return cmp_etagère;
     }
-    public  int getCmpReservation(){
+    public static int getCmpReservation(){
         return cmp_reservation;
     }
-    public  int getCmpPileRetour(){
+    public static int getCmpPileRetour(){
         return cmp_pile_retour;
     }
     public MembreBibliothèque getEmprunteur(){

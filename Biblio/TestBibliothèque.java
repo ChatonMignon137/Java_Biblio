@@ -3,7 +3,7 @@ package Biblio;
 import java.util.*;
 public class TestBibliothèque {
 
-    static DocBiblio doc1 = new DocBiblio("004. 178 K20PM", "Introduction au java", "J.Leblanc", 2015);
+        static DocBiblio doc1 = new DocBiblio("004. 178 K20PM", "Introduction au java", "J.Leblanc", 2015);
         static DocBiblio doc2 = new DocBiblio("967. 4987 T248O", "Structure de données", "M.Machin", 2022);
         static DocBiblio doc3 = new DocBiblio("527. 4987 T2205", "Besoin d'IHM", "E.fayt", 2024);
         static DocBiblio doc4 = new DocBiblio("121. 2121 21212", "50 nuances d'egrep" , "B.A", 1212);
@@ -26,10 +26,17 @@ public class TestBibliothèque {
         static MembreBibliothèque membre9 = new MembreBibliothèque("Besnard", "Valentin", "07.06.06.06.06.06", "12 rue du secrétariat");
         static MembreBibliothèque membre10 = new MembreBibliothèque("Nouvel", "Armand", "06.05.04.03.02.01", "12 rue de la bible");
         static MembreBibliothèque choixMembreBibliothèque;
+        static CatalogueBiblio catalogue = new CatalogueBiblio();
+        static ListeMembre listeMembre = new ListeMembre();
+        
 
         static Scanner entree = new Scanner(System.in);
         static int choix;
     public static void main(String[] args) {
+        listeMembre.addMembre(membre1);
+        listeMembre.addMembre(membre2);
+        catalogue.addDoc(doc1);
+        catalogue.addDoc(doc2);
         do {
             System.out.println("Bienvenue dans le programme de gestion de la bibliothèque");
             System.out.println();
@@ -39,7 +46,17 @@ public class TestBibliothèque {
             System.out.println("4. Reservation d'un document");
             System.out.println("5. Nombre de document par emplacement");
             System.out.println("6. Afficher les informations des membre emprunteurs ou réservant un document");
-            System.out.println("7. Quitter");
+            System.out.println("7. Afficher le catalogue");
+            System.out.println("8. Afficher les documents empruntés");
+            System.out.println("9. Afficher un document précis");
+            System.out.println("10. Ajouter un document au catalogue");
+            System.out.println("11. Supprimer un document du catalogue");
+            System.out.println("12. Ajouter un membre à la bibliothèque");
+            System.out.println("13. Afficher un membre de la bibliothèque");
+            System.out.println("14. Emprunter un document du catalogue");
+            System.out.println("15. Réserver un document du catalogue");
+            System.out.println("16. Retourner un document du catalogue");
+            System.out.println("17. Quitter");
             System.out.println();
             System.out.println("-------------------------------------------------------------");
             System.out.println("Veuillez entrer le numéro de l'action que vous souhaitez effectuer");
@@ -79,11 +96,86 @@ public class TestBibliothèque {
                         System.out.println("Le document n'est ni emprunté ni réservé");
                     }
                     break;
-            
+                case 7:
+                    catalogue.afficheCatalogue();
+                    break;
+                case 8:
+                    catalogue.afficheEmprunte();
+                    break;
+                case 9:
+                    System.out.println("Veuillez entrer le numéro du document que vous souhaitez afficher");
+                    int i = entree.nextInt();
+                    entree.nextLine();
+                    System.out.println(catalogue.accesDoc(i).toString());
+                    break;
+                case 10:
+                    choixdocBiblio = choixdocBiblio();
+                    if (catalogue.addDoc(choixdocBiblio)) {
+                        System.out.println("Le document a bien été ajouté au catalogue");
+                    } else {
+                        System.out.println("Le document n'a pas pu être ajouté au catalogue");
+                    }
+                    break;
+                case 11:
+                    choixdocBiblio = choixdocBiblio();
+                    if (catalogue.suprDoc(choixdocBiblio)) {
+                        System.out.println("Le document a bien été supprimé du catalogue");
+                    } else {
+                        System.out.println("Le document n'a pas pu être supprimé du catalogue");
+                    }
+                    break;
+                case 12:
+                    choixMembreBibliothèque = choixMembreBibliothèque();
+                    if (listeMembre.addMembre(choixMembreBibliothèque)) {
+                        System.out.println("Le membre a bien été ajouté à la bibliothèque");
+                    } else {
+                        System.out.println("Le membre n'a pas pu être ajouté à la bibliothèque");
+                    }
+                case 13:
+                    System.out.println("Veuillez entrer le numéro du membre que vous souhaitez afficher");
+                    i = entree.nextInt();
+                    entree.nextLine();
+                    System.out.println(listeMembre.accesMembre(i).toString());
+                    break;
+                case 14:
+                    System.out.println("Veuillez entrer le numéro du document que vous souhaitez emprunter");
+                    i = entree.nextInt();
+                    entree.nextLine();
+                    choixMembreBibliothèque = choixMembreBibliothèque();
+                    if (catalogue.empruntDoc(i, choixMembreBibliothèque)) {
+                        System.out.println("L'emprunt a bien été effectué");
+                    } else {
+                        System.out.println("L'emprunt n'a pas pu être effectué");
+                    }
+                    break;
+                case 15:
+                    System.out.println("Veuillez entrer le numéro du document que vous souhaitez réserver");
+                    i = entree.nextInt();
+                    entree.nextLine();
+                    choixMembreBibliothèque = choixMembreBibliothèque();
+                    if (catalogue.ReserveDoc(i, choixMembreBibliothèque)) {
+                        System.out.println("La réservation a bien été effectuée");
+                    } else {
+                        System.out.println("La réservation n'a pas pu être effectuée");
+                    }
+                    break;
+                case 16:
+                    System.out.println("Veuillez entrer le numéro du document que vous souhaitez retourner");
+                    i = entree.nextInt();
+                    entree.nextLine();
+                    if (catalogue.anulReservation(i, choixMembreBibliothèque)) {
+                        System.out.println("Le retour a bien été effectué");
+                    } else {
+                        System.out.println("Le retour n'a pas pu être effectué");
+                    }
+                    break;
+                case 17:
+                    System.out.println("Merci d'avoir utilisé notre programme");
+                    break;
                 default:
                     break;
             }
-        } while(choix != 7);
+        } while(choix != 17);
     }
 
     public static DocBiblio choixdocBiblio() {
@@ -132,10 +224,10 @@ public class TestBibliothèque {
 
     public static void NbdocumentParEmplacement() {
         System.out.println("Nombre de document par emplacement");
-        System.out.println("Nombre de document sur l'étagère : " + doc1.getCmpEtagère());
-        System.out.println("Nombre de document emprunté : " + doc1.getCmpEmprunt());
-        System.out.println("Nombre de document réservé : " + doc1.getCmpReservation());
-        System.out.println("Nombre de document dans la pile de retour : " + doc1.getCmpPileRetour());
+        System.out.println("Nombre de document sur l'étagère : " + DocBiblio.getCmpEtagère());
+        System.out.println("Nombre de document emprunté : " + DocBiblio.getCmpEmprunt());
+        System.out.println("Nombre de document réservé : " + DocBiblio.getCmpReservation());
+        System.out.println("Nombre de document dans la pile de retour : " + DocBiblio.getCmpPileRetour());
     }
 
     public static void ChoixChangementEtat(){

@@ -4,16 +4,29 @@ import java.util.*;
 public class Start {
     static BienImobilier Bien1 = new BienImobilier("Petite maison en campagne", 12, 120, 20.15, true, true, null, null);
     static BienImobilier Bien2 = new BienImobilier("Appartement en ville", 20, 200, 15.5, true, true, null, null);
+    static BienImobilier Bien3 = new BienImobilier("Maison de campagne", 15, 150, 18.5, true, true, null, null);
+    static BienImobilier Bien4 = new BienImobilier("Penthouse", 25, 250, 10.5, true, true, null, null);
     static Locataire Loca1 = new Locataire("Ethan Fayt", "2 rue du paradis", 412, Bien1);
     static Propriétaire Proprio1 = new Propriétaire("Crous", "1 rue de la précarité", false, 1200);
     static Locataire Loca2 = new Locataire("Jean Dupont", "5 rue de la liberté", 500, Bien2);
     static Propriétaire Proprio2 = new Propriétaire("Dupont", "5 rue de la liberté", true, 2000);
     static Scanner entree = new Scanner(System.in);
+    static AgenceImobilière Agence1 = new AgenceImobilière();
     public static void main(String[] args) {
         Bien1.setLocataire(Loca1);
         Bien1.setPropriétaire(Proprio1);
         Bien2.setLocataire(Loca2);
         Bien2.setPropriétaire(Proprio2);
+        if (Agence1.ajouterBien(Bien1) == true) {
+            System.out.println("Bien ajouté avec succès");
+        } else {
+            System.out.println("Echec de l'ajout du bien");
+        }
+        if (Agence1.ajouterBien(Bien2) == true) {
+            System.out.println("Bien ajouté avec succès");
+        } else {
+            System.out.println("Echec de l'ajout du bien");
+        }
 
         int choix;
         
@@ -24,7 +37,10 @@ public class Start {
             System.out.println("3. Afficher les informations d'un locataire");
             System.out.println("4. Afficher l'état d'un bien");
             System.out.println("5. Modifier l'état d'un bien");
-            System.out.println("6. Quitter");
+            System.out.println("6. Afficher les biens d'une agence");
+            System.out.println("7. Recherche d'un bien par référence");
+            System.out.println("8. Supprimer un bien");
+            System.out.println("9. Quitter");
             System.out.println("Veuillez entrer le numéro de l'action que vous souhaitez effectuer");
             choix = entree.nextInt();
             entree.nextLine();
@@ -72,6 +88,32 @@ public class Start {
                     }
                     break;
                 case 6:
+                    AgenceImobilière choixAgence = choixAgenceImobilière();
+                    choixAgence.afficherBiens();
+                    break;
+                case 7:
+                    System.out.println("Veuillez entrer la référence du bien que vous recherchez");
+                    int ref = entree.nextInt();
+                    entree.nextLine();
+                    choixAgence = choixAgenceImobilière();
+                    if (choixAgence.rechercheParRef(ref) == ref){
+                        System.out.println("Recherche réussie");
+                    } else {
+                        System.out.println("Recherche échouée");
+                    }
+                    break;
+                case 8:
+                    System.out.println("Veuillez entrer la référence du bien que vous souhaitez supprimer");
+                    ref = entree.nextInt();
+                    entree.nextLine();
+                    choixAgence = choixAgenceImobilière();
+                    if (choixAgence.supprimerBien(ref) == ref) {
+                        System.out.println("Bien supprimé avec succès");
+                    } else {
+                        System.out.println("Echec de la suppression du bien");
+                    }
+                    break;
+                case 9:
                     System.out.println("Merci d'avoir utilisé notre programme");
                     break;
                 default:
@@ -133,5 +175,20 @@ public class Start {
             }
         } while (choixPropriétaire == null);
         return choixPropriétaire;
+    }
+
+    public static AgenceImobilière choixAgenceImobilière() {
+        AgenceImobilière Agence_choisie;
+        do {
+            System.out.println("Veuillez choisir une agence parmi les suivantes : ");
+            System.out.println("1. Agence 1");
+            int choix = entree.nextInt();
+            if (choix == 1) {
+                Agence_choisie = Agence1;
+            } else {
+                Agence_choisie = null;
+            }
+        }while (Agence_choisie == null);
+        return Agence_choisie;
     }
 }
