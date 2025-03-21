@@ -1,18 +1,19 @@
-package Immobilier;
+package immobilier;
 
 public class AgenceImobilière {
-    private static final int NbMaxBien = 10;
+    private static final int NB_MAX_BIEN = 10;
+    @SuppressWarnings("FieldMayBeFinal")
     private BienImobilier[] biens;
     private int nbBiens;
 
     public AgenceImobilière() {
-        biens = new BienImobilier[NbMaxBien];
+        biens = new BienImobilier[NB_MAX_BIEN];
         nbBiens = 0;
     }
 
     public boolean ajouterBien(BienImobilier bien) {
         boolean resultat = false;
-        if (nbBiens < NbMaxBien) {
+        if (nbBiens < NB_MAX_BIEN) {
             biens[nbBiens] = bien;
             nbBiens++;
             resultat = true;

@@ -99,11 +99,12 @@ public class DocBiblio {
 
     public boolean emprunt(MembreBibliothèque Emprunteur){
         boolean resultat = false;
-        if(getDocStatut().equals("disponible")  )
+        if(getDocStatut().equals("disponible") && Emprunteur.peutemprunter()) 
         {
             SetStatut("emprunté");
             SetDocStatutPhysique("chez l'emprunteur");
             SetEmprunteur(Emprunteur);
+            Emprunteur.incrementerNbEmprunt();
             cmp_emprunt++;
             cmp_etagère--;
             resultat = true;
@@ -133,6 +134,8 @@ public class DocBiblio {
         if (getDocStatut().equals("réservé") ) {
             SetDocStatutPhysique("Section_réservée");
             SetStatut("Section_réservée");
+            getEmprunteur().decrementerNbEmprunt();
+            SetEmprunteur(null);
             cmp_reservation++;
             resultat = true;
         }
@@ -176,6 +179,7 @@ public class DocBiblio {
         return resultat;
     }
     //autres
+    @SuppressWarnings("override")
     public String toString(){
         String resultat = "Code d'archivage: " + code_archivage + "\n" + "Titre: " + titre + "\n" + "Auteur: " + auteur + "\n" + "Année de publication: " + annee_publication + "\n" + "Statut: " + StatutDoc + "\n";
         return resultat;

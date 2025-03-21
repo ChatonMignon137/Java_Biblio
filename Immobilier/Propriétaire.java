@@ -1,4 +1,4 @@
-package Immobilier;
+package immobilier;
 
 public class Propriétaire {
     String Identitée;
@@ -39,6 +39,7 @@ public class Propriétaire {
     public void setAdressePrincipal(String AdressePrincipal){
         this.AdressePrincipal = AdressePrincipal;
     }
+    @SuppressWarnings("override")
     public String toString(){
         return "Propriétaire : " + Identitée + " habite au " + AdressePrincipal + " et paye une taxe d'habitation de " + MontantTaxeHabitation + "€";
     }

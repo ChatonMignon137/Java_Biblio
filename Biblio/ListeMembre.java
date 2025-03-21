@@ -6,6 +6,7 @@ public class ListeMembre {
     ArrayList<MembreBibliothèque> listeMembre;
     int nbMembre;
 
+    @SuppressWarnings("Convert2Diamond")
     public ListeMembre() {
         listeMembre = new ArrayList<MembreBibliothèque>();
         nbMembre = 0;

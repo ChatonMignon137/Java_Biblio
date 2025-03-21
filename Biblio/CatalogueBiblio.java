@@ -6,6 +6,7 @@ public class CatalogueBiblio {
     ArrayList<DocBiblio> catalogue;
     int nbDoc;
 
+    @SuppressWarnings("Convert2Diamond")
     public CatalogueBiblio() {
         catalogue = new ArrayList<DocBiblio>();
         nbDoc = 0;
@@ -48,6 +49,7 @@ public class CatalogueBiblio {
             System.out.println("Catalogue vide");
         }
     }
+    @SuppressWarnings("empty-statement")
     public void afficheEmprunte(){;
         if (DocBiblio.getCmpEmprunt() == 0) {
             System.out.println("Aucun document n'est emprunté");
@@ -62,7 +64,7 @@ public class CatalogueBiblio {
     public boolean empruntDoc(int indiceDoc, MembreBibliothèque membre){
         boolean resultat = false;
         DocBiblio doc = accesDoc(indiceDoc);
-        if (doc.getDocStatut().equals("disponible")) {
+        if (doc.getDocStatut().equals("disponible") && membre.peutemprunter()) {
             doc.emprunt(membre);
             resultat = true;
         }
@@ -94,5 +96,23 @@ public class CatalogueBiblio {
             resultat = true;
         }
         return resultat;
+    }
+    public int compteLivre(){
+        int nbLivre = 0;
+        for (int i = 0; i < nbDoc; i++) {
+            if (catalogue.get(i) instanceof Livre) {
+                nbLivre++;
+            }
+        }
+        return nbLivre;
+    }
+    public int compteCD(){
+        int nbCD = 0;
+        for (int i = 0; i < nbDoc; i++) {
+            if (catalogue.get(i) instanceof CD) {
+                nbCD++;
+            }
+        }
+        return nbCD;
     }
 }

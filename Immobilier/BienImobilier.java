@@ -1,4 +1,4 @@
-package Immobilier;
+package immobilier;
 
 public class BienImobilier {
     private static int bID = 0;
@@ -65,13 +65,14 @@ public class BienImobilier {
         return taxe_fonciere;
     }
 
+    @Override
     public String toString(){
         String resultat = "Description: " + description + "\n" + "Prix au m2: " + prix_au_m2 + "\n" + "Surface: " + surface + "\n" + "Taux d'imposition: " + taux_imposition + "\n" + "Est louable: " + estLouable + "\n" + "Est vendable: " + estVendable + "\n" + "Taxe foncière: " + taxe_fonciere + "\n";
         return resultat;
     }
 
     public double calculateTaxeFonciere(){
-        double resultat = 0;
+        double resultat;
         resultat = (prix_au_m2*surface)*12;
         resultat = resultat*0.5;
         resultat = resultat * taux_imposition;
@@ -98,6 +99,7 @@ public class BienImobilier {
     public void setTaxeFonciere(double taxe_donnee){
         if (taxe_donnee < 0){
             taxe_donnee = 0;
+            this.taxe_fonciere = taxe_donnee;
         }
         else{
             this.taxe_fonciere = taxe_donnee;

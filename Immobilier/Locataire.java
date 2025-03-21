@@ -1,4 +1,4 @@
-package Immobilier;
+package immobilier;
 
 public class Locataire {
     private String Identitée;
@@ -6,11 +6,10 @@ public class Locataire {
     private int MontantLoyer;
     private BienImobilier Occupe;
 
-    public  Locataire(String Identitée, String Adresse, int MontantLoyer,BienImobilier Occupe){
+    public  Locataire(String Identitée, String Adresse, int MontantLoyer){
         this.Adresse = Adresse;
         this.Identitée = Identitée;
         this.MontantLoyer = MontantLoyer;    
-        this.Occupe = Occupe;
     }
 
     public String getIdentitée(){
@@ -40,6 +39,7 @@ public class Locataire {
     public void setIdentitée(String Identitée){
         this.Identitée = Identitée;
     }
+    @SuppressWarnings("override")
     public String toString(){
         return "Locataire : " + Identitée + " habite au " + Adresse + " et paye un loyer de " + MontantLoyer + "€ pour le bien " + Occupe.getDescription();
     }
